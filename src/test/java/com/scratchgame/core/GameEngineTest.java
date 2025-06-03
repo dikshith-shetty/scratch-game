@@ -3,7 +3,6 @@ package com.scratchgame.core;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -11,10 +10,9 @@ import org.mockito.Mockito;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
-import com.scratchgame.config.Config;
+import com.scratchgame.config.dto.Config;
 import com.scratchgame.config.ConfigLoader;
-import com.scratchgame.config.Symbol;
-import com.scratchgame.config.WinCombinations;
+import com.scratchgame.config.dto.Symbol;
 import com.scratchgame.core.winrule.WinRuleEvaluator;
 
 public class GameEngineTest {

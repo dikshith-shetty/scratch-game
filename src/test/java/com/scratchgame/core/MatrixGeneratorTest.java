@@ -1,10 +1,6 @@
 package com.scratchgame.core;
 
-import com.scratchgame.config.BonusSymbolsProbability;
-import com.scratchgame.config.Config;
-import com.scratchgame.config.Probabilities;
-import com.scratchgame.config.StandardSymbolProbability;
-import com.scratchgame.config.Symbol;
+import com.scratchgame.config.dto.*;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -27,8 +23,8 @@ public class MatrixGeneratorTest {
 
         // Mock Symbols
         Map<String, Symbol> symbols = new HashMap<>();
-        symbols.put("A", new Symbol("A", 1.0, null, null, 0));
-        symbols.put("B", new Symbol("B", 0.5, null, null, 0));
+        symbols.put("A", new StandardSymbol("A", 1.0));
+        symbols.put("B", new StandardSymbol("B", 0.5));
         when(config.getSymbols()).thenReturn(symbols);
 
         // Mock Standard Probabilities
@@ -65,8 +61,8 @@ public class MatrixGeneratorTest {
 
         // Mock Symbols
         Map<String, Symbol> symbols = new HashMap<>();
-        symbols.put("A", new Symbol("A", 1.0, null, null, 0));
-        symbols.put("BONUS", new Symbol("BONUS", 2.0, "bonus", null, 1));
+        symbols.put("A", new StandardSymbol("A", 1.0));
+        symbols.put("BONUS", new MultiplyRewardBonus("BONUS", 2.0));
         when(config.getSymbols()).thenReturn(symbols);
 
         // Mock Standard Probabilities
@@ -98,7 +94,7 @@ public class MatrixGeneratorTest {
         when(config.getColumns()).thenReturn(1);
         when(config.getProbabilities()).thenReturn(Mockito.mock(Probabilities.class));
         when(config.getProbabilities().getStandardSymbols()).thenReturn(List.of());
-        when(config.getSymbols()).thenReturn(Map.of("A", new Symbol("A", 1.0, null, null, 0)));
+        when(config.getSymbols()).thenReturn(Map.of("A", new StandardSymbol("A", 1.0)));
 
         MatrixGenerator generator = new MatrixGenerator(config);
         assertThrows(IllegalStateException.class, generator::generateMatrix);

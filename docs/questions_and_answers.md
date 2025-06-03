@@ -7,18 +7,18 @@ This document captures key clarifying questions and agreed-upon assumptions rega
 ### ❓ Assumptions on Optional Fields
 
 **Q: The problem mentions optional fields (like columns, rows, win combinations). Should I handle missing values?**  
-**A:** Yes, handle them gracefully. If missing:
-- Use default matrix size: `3x3`
-- Use default win combinations (e.g., `"same_symbol_3_times"`)
+**A:** No, throw exception. We assumed config will have minimal required attributes and its value.
 
 ---
 
 ### ❓ Handling Missing Probabilities
 
-**Q: If `standard_symbols` is missing for a cell, should I fallback to `standard_symbols[0][0]`?**  
+**Q: If `probabilities.standard_symbols` is missing for a cell, should I fall back to `probabilities.standard_symbols[0]`?**  
 **A:** Yes.  
-**Q: What if `standard_symbols[0][0]` is also missing?**  
-**A:** You should throw a configuration exception with a clear error message.
+**Q: What if `standard_symbols[0]` is also missing?**  
+**A:** Use random selection of symbol for the cell.
+
+*note*: `standard_symbols[0][0]` mentioned in the problem statement. Looking at the config json, which is assumed that the `probablities.standard_symbols[0]`. 
 
 ---
 
@@ -35,10 +35,10 @@ This document captures key clarifying questions and agreed-upon assumptions rega
 ### ❓ Winning Combinations Logic
 
 **Q: If a symbol appears in multiple winning conditions (e.g., row and column), should both apply?**  
-**A:** Yes, all applicable multipliers should apply.
+**A:** Yes, all applicable win rule should apply based on the group. select one with the highest multiplier win rule per group. 
 
-**Q: If a symbol satisfies both 3-in-a-row and 4-in-a-row, should both apply?**  
-**A:** Yes. Apply all matching win combinations.
+**Q: If a multiple symbol satisfies same rule, should both apply?**  
+**A:** Yes. Apply all matching win combinations. Keep in mind that per group win rule per symbol.
 
 ---
 

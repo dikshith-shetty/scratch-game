@@ -5,27 +5,29 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import com.scratchgame.config.dto.StandardSymbol;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
-import com.scratchgame.config.Config;
-import com.scratchgame.config.Symbol;
-import com.scratchgame.config.WinCombinations;
+import com.scratchgame.config.dto.Config;
+import com.scratchgame.config.dto.Symbol;
+import com.scratchgame.config.dto.WinCombinations;
 
 public class WinRuleEvaluatorTest {
 
-    private Symbol symbolA = new Symbol("A", 1.0, null, null, 0);
-    private Symbol symbolB = new Symbol("B", 0.5, null, null, 0);
-    private Symbol symbolC = new Symbol("C", 0.8, null, null, 0);
-    private Symbol symbolD = new Symbol("D", 1.2, null, null, 0);
-    private Symbol symbolE = new Symbol("E", 1.0, null, null, 0);
-    private Symbol symbolF = new Symbol("F", 0.7, null, null, 0);
-    private Symbol symbolG = new Symbol("G", 1.1, null, null, 0);
-    private Symbol symbolH = new Symbol("H", 0.9, null, null, 0);
-    private Symbol symbolI = new Symbol("I", 1.5, null, null, 0);
+    private final Symbol symbolA = new StandardSymbol("A", 1.0);
+    private final Symbol symbolB = new StandardSymbol("B", 0.5);
+    private final Symbol symbolC = new StandardSymbol("C", 0.8);
+    private final Symbol symbolD = new StandardSymbol("D", 1.2);
+    private final Symbol symbolE = new StandardSymbol("E", 1.0);
+    private final Symbol symbolF = new StandardSymbol("F", 0.7);
+    private final Symbol symbolG = new StandardSymbol("G", 1.1);
+    private final Symbol symbolH = new StandardSymbol("H", 0.9);
+    private final Symbol symbolI = new StandardSymbol("I", 1.5);
 
     @Test
     void testEvaluate_sameSymbolsWin() {

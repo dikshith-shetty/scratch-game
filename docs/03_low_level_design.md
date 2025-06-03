@@ -33,11 +33,11 @@ class Config {
 ### 2.2.1 Symbol
 
 ```java
-class Symbol {
-    String type; // "standard" or "bonus"
-    Integer rewardMultiplier;
-    Integer extra;
-    String impact; // for bonus symbols
+import com.scratchgame.enums.SymbolType;
+
+abstract class Symbol {
+  SymbolType type;
+  String SymbolId;
 }
 ```
 

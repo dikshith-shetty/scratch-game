@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import com.scratchgame.config.Config;
+import com.scratchgame.config.dto.Config;
 import com.scratchgame.config.ConfigLoader;
 import com.scratchgame.config.validation.ConfigValidationService;
 import com.scratchgame.config.validation.DimensionsValidator;

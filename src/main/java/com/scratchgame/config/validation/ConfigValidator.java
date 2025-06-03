@@ -1,7 +1,7 @@
 package com.scratchgame.config.validation;
 
-import com.scratchgame.config.Config;
+import com.scratchgame.config.dto.Config;
 
-public interface ConfigValidator {
+public interface ConfigValidator  {
     void validate(Config config);
 }

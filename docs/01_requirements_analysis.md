@@ -22,14 +22,15 @@ Note: These are the questions I had during the requirement analysis. I couldn't 
 so I have assumed the answers using my best of my knowledge and interpretation of the problem. Development is made based on these answers.
 [please look this link for detailed question discussion and derided assumptions](questions_and_answers.md)
 
-1. Should we support only square matrices? → No, support non-square `(n × m)` matrices with `n >= 1` and `m >= 2`.
+1. Should we support only square matrices? → No, support non-square `(n × m)` matrices with `n >= 1` and `m >= 3`.
 1. Is the config file guaranteed to be valid? → Yes, all required configs will be present without fail.
 1. Can the standard symbol be absent → No, at least 1 will be defined.
 1. Can the bonus symbol be absent? → No, at least 1 will be defined.
 1. Are more win rules expected in the future? → Yes, the system should support it.
-1. How many bonus symbols should be injected? → Exactly one, if defined.
-1. Is betting amount a float? → Yes, we use BigDecimal.
+1. How many bonus symbols should be injected? → Exactly one.
+1. Is betting amount a float? → Yes, we use `double`.
 1. Do symbols place by weightage in the matrix → No, symbol weights are not mentioned in the config with respect to full matrix, so no weights are considered.
+1. What to do if Symbol cell probability and/or default cell probability and/or Bonus symbol probability is not defined in config?  → Symbol is selected randomly.  
 
 ---
 ## ✅ Functional Requirements
@@ -57,13 +58,13 @@ so I have assumed the answers using my best of my knowledge and interpretation o
 
 ## 🔧 Assumptions
 
-1. Betting amount should be whole i.e `Integer`. This a
+1. Betting amount should be whole i.e `Integer`. This assumed by looking into given examples.
 1. Configuration file is **always a valid json**.
 1. The scratch matrix can be non-square (`n × m`).
-1. Matrix is generated pseudo-randomly, and the symbol for each cell is determined independently, using symbol probabilities. if the probabilities not present we consider standard_symbols[0] probabilies values are default.
-1. Bonus symbol always presents and is placed **after** the matrix is generated and placed at exactly one random position in the matrix.
+1. Matrix is generated pseudo-randomly, and the symbol for each cell is determined independently, using symbol probabilities. if the probabilities not present we consider standard_symbols[0] probabilities values are default. If that also not present, we select symbol by randomly. 
+1. Bonus symbol always presents and is placed **after** the matrix is generated and placed at exactly one random position in the matrix based on the given probability or randomly selecting on if probability not present.
 1. Bonus symbol placement is independent of weight.
-1. Win rules may expand in the future — the system is expected to be extensible.
+1. At least one win rule will be presented in config. Win rules may expand in the future — the system is expected to be extensible.
 
 ---
 

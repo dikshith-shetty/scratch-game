@@ -1,4 +1,4 @@
-package com.scratchgame.config;
+package com.scratchgame.config.dto;
 
 import java.util.List;
 

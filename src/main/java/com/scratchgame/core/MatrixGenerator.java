@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import com.scratchgame.config.BonusSymbolsProbability;
-import com.scratchgame.config.Config;
-import com.scratchgame.config.StandardSymbolProbability;
-import com.scratchgame.config.Symbol;
+import com.scratchgame.config.dto.BonusSymbolsProbability;
+import com.scratchgame.config.dto.Config;
+import com.scratchgame.config.dto.StandardSymbolProbability;
+import com.scratchgame.config.dto.Symbol;
 
 public class MatrixGenerator {
 

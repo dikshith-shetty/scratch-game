@@ -5,9 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.scratchgame.config.Config;
-import com.scratchgame.config.Symbol;
-import com.scratchgame.config.WinCombinations;
+import com.scratchgame.config.dto.Config;
+import com.scratchgame.config.dto.Symbol;
+import com.scratchgame.enums.SymbolType;
+import com.scratchgame.config.dto.WinCombinations;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -74,7 +75,7 @@ public class WinRuleEvaluator {
                 symbolPositions.computeIfAbsent(symbol, k -> new ArrayList<>()).add(coordinate);
                 coordinateToSymbolMap.put(coordinate, symbol);
 
-                if (symbol.getType() != null && symbol.getType().equals("bonus")) {
+                if (symbol.getType() != null && symbol.getType().equals(SymbolType.BONUS)) {
                     encounteredBonusSymbol = symbol;
                 }
             }

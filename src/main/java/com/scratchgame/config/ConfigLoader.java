@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.scratchgame.config.dto.Config;
+import com.scratchgame.config.dto.Symbol;
+import com.scratchgame.config.dto.WinCombinations;
 import com.scratchgame.config.validation.ConfigValidationService;
 
 public class ConfigLoader {

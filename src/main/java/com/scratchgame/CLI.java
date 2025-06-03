@@ -3,11 +3,12 @@ package com.scratchgame;
 import java.io.IOException;
 import java.util.Arrays;
 
-import com.scratchgame.config.Config;
+import com.scratchgame.config.dto.Config;
 import com.scratchgame.config.ConfigLoader;
 import com.scratchgame.config.validation.ConfigValidationService;
 import com.scratchgame.config.validation.DimensionsValidator;
 import com.scratchgame.config.validation.SymbolValidator;
+import com.scratchgame.config.validation.WinRuleValidator;
 import com.scratchgame.core.GameEngine;
 import com.scratchgame.core.GameResult;
 import com.scratchgame.core.MatrixGenerator;
@@ -53,8 +54,9 @@ public class CLI {
         // Create validators
         DimensionsValidator dimensionsValidator = new DimensionsValidator();
         SymbolValidator symbolsValidator = new SymbolValidator();
+        WinRuleValidator winRuleValidator = new WinRuleValidator();
         // Create validation service
-        ConfigValidationService validationService = new ConfigValidationService(Arrays.asList(dimensionsValidator, symbolsValidator));
+        ConfigValidationService validationService = new ConfigValidationService(Arrays.asList(dimensionsValidator, symbolsValidator,winRuleValidator));
         ConfigLoader configLoader = new ConfigLoader(validationService);
 
         try {

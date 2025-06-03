@@ -57,7 +57,7 @@ symbols(based on probabilities for each individual cell) and based on winning co
 user either will win or lose.
 User will place a bet with any amount which we call *betting amount* in this assignment.
 
-#### [Please look this for problem statement in detail](assignment/problem_description)
+#### [Please look at this problem statement in detail](assignment/problem_description.md)
 
 ---
 ## 🚀 Features
@@ -78,30 +78,29 @@ User will place a bet with any amount which we call *betting amount* in this ass
 
 * For each cell in matrix:
 
-    * Get standard probability list for that (row, column)
-    * Generate random symbol based on weights
+    * Get a standard probability weight list for that cell (row, column) from config
+    * Generate random symbol based on weightage for each symbol in the cell
+  
 * Choose a random position
 
-    * Place exactly 1 bonus symbol from configured set using weighted randomness
+    * Place exactly 1 bonus symbol based on weighted randomness from the bonus probability weight from config
 
 ### Win Evaluation Algorithm
 
-* Used data-drive approach
+* Followed data-drive approach.
 * Created a Symbol count tracking map, cell list and stored the details in one matrix scan.
-* Iterate all win rules
+* Iterate all win rules.
 * For each rule:
-
-    * Check if symbol pattern matches based on "when"
-    * If match, store the matched rule
-    * If multiple win rule match with the same rule **group** use the win rule having max multiplayer
-* Store matched rules
-* Calculated the total rewards using stored matched rules and symbol multiplier.
+    * Check if a symbol pattern matches based on `when`.
+    * If a match, store the matched rule.
+    * If multiple win rule matches with the same rule `group` use the win rule having max multiplayer with in that group.
+* Store matched rules.
+* Calculate the total rewards using stored matched rules and symbol multiplier.
 
 ### Bonus Application Algorithm
 
 * Add the bonus to the total if there is a matched win rule.
 * Based on bonus symbol impact:
-
     * "multiply" → multiply reward
     * "extra" → add fixed bonus
     * "miss" → zero reward

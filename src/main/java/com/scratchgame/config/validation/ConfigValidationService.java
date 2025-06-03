@@ -2,7 +2,7 @@ package com.scratchgame.config.validation;
 
 import java.util.List;
 
-import com.scratchgame.config.Config;
+import com.scratchgame.config.dto.Config;
 
 public class ConfigValidationService {
 

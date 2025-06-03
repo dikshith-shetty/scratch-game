@@ -3,9 +3,9 @@ package com.scratchgame.core;
 import java.util.List;
 import java.util.Map;
 
-import com.scratchgame.config.Config;
-import com.scratchgame.config.Symbol;
-import com.scratchgame.config.WinCombinations;
+import com.scratchgame.config.dto.Config;
+import com.scratchgame.config.dto.Symbol;
+import com.scratchgame.config.dto.WinCombinations;
 import com.scratchgame.core.winrule.WinRuleEvaluator;
 
 public class GameEngine {

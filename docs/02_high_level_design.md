@@ -77,7 +77,7 @@ This application follows a modular architecture with the following major compone
 - Matrix can be non-square (n×m)
 - Bonus symbols are placed exactly once, at a random cell
 - Symbol selection is pseudo-random based on probability
-- Betting amount is fractional and handled using `BigDecimal`
+- Betting amount is fractional and handled using `double`
 - Output is printed in JSON-like format
 
 ---
