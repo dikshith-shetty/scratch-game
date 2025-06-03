@@ -54,7 +54,7 @@ reward value is updated to 3600. Reason:
 ## Problem Statement
 You need to build a scratch game, that will generate a matrix (for example 3x3) from 
 symbols(based on probabilities for each individual cell) and based on winning combintations 
-user either will win or lost.
+user either will win or lose.
 User will place a bet with any amount which we call *betting amount* in this assignment.
 
 #### [Please look this for problem statement in detail](assignment/problem_description)
@@ -151,10 +151,10 @@ Includes:
 
 
 see [Software Specification Document](./SSD.md) for document list
-See `/docs/diagrams` for:
-- UML Diagrams
-See `/docs/` for:
-- SSD documents
+
+See [`/docs/diagrams`](docs/diagrams) for: UML Diagrams
+
+See [`/docs/`](./docs/) for: SSD documents
 
 ---
 
