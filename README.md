@@ -149,9 +149,12 @@ Includes:
 
 ## 🧩 UML & Documentation
 
-See `/docs/uml/` for:
-- Class Diagram (class.puml / class.png)
-- SSD Diagrams (4 phases: Identify, Extract, Refine, Finalize)
+
+see [Software Specification Document](./SSD.md) for document list
+See `/docs/diagrams` for:
+- UML Diagrams
+See `/docs/` for:
+- SSD documents
 
 ---
 
