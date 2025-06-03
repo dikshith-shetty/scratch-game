@@ -1,0 +1,19 @@
+@startuml
+title Scratch Game - System Context Diagram
+actor "User (Player)" as User
+package "Scratch Game CLI App" {
+  [CLI App] as CLI
+  [Game Engine] as Engine
+  [Config Loader] as Config
+}
+
+file "config.json" as ConfigFile
+[console] <<device>> as Output
+
+User --> CLI : runs with config \n and betting amount
+CLI --> Config : loads game rules\n& probabilities
+CLI --> Engine : runs game logic
+Config --> ConfigFile : reads symbol data
+Engine --> Output : outputs result
+
+@enduml

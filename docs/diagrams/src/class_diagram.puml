@@ -1,0 +1,98 @@
+@startuml
+abstract class Symbol {
+  String symbolId
+  String type
+}
+
+class StandardSymbol {
+  Integer rewardMultiplier
+}
+
+class BonusSymbol {
+  String impact
+  Integer extra
+}
+
+Symbol <|-- StandardSymbol
+Symbol <|-- BonusSymbol
+
+class SymbolFactory {
+  +static Symbol create(String id, JsonNode node)
+}
+
+class Config {
+  int rows
+  int columns
+  Map<String, Symbol> symbols
+  Probabilities probabilities
+  Map<String, WinRule> winCombinations
+}
+
+class Probabilities {
+  List<StandardSymbolProbabilities> standardSymbols
+  BonusSymbolProbabilities bonusSymbols
+}
+
+class StandardSymbolProbabilities {
+  int row
+  int column
+  Map<String, Double> symbols
+}
+
+class BonusSymbolProbabilities {
+  Map<String, Integer> symbols
+}
+
+class WinRule {
+  String when
+  int count
+  List<List<String>> coveredAreas
+  String group
+  int rewardMultiplier
+}
+
+class GameEngine {
+  GameResult run(Config config, BigDecimal betAmount)
+}
+
+class MatrixGenerator {
+  String[][] generate(Config config)
+}
+
+class RewardEngine {
+  GameResult evaluate(Config config, String[][] matrix, BigDecimal bet)
+}
+
+interface BonusStrategy {
+  BigDecimal apply(BigDecimal reward, BonusSymbol bonus)
+}
+
+class BonusStrategyFactory {
+  BonusStrategy create(BonusSymbol bonusSymbol)
+}
+
+class MultiplyBonusStrategy implements BonusStrategy {}
+class ExtraBonusStrategy implements BonusStrategy {}
+class MissBonusStrategy implements BonusStrategy {}
+
+class GameResult {
+  String[][] matrix
+  BigDecimal reward
+  Map<String, List<String>> appliedWinningCombinations
+  String appliedBonusSymbol
+}
+
+Config --> Symbol
+Config --> Probabilities
+Config --> WinRule
+Probabilities --> StandardSymbolProbabilities
+Probabilities --> BonusSymbolProbabilities
+GameEngine --> MatrixGenerator
+GameEngine --> RewardEngine
+RewardEngine --> BonusStrategyFactory
+BonusStrategyFactory --> BonusStrategy
+RewardEngine --> GameResult
+MatrixGenerator --> Config
+RewardEngine --> Config
+SymbolFactory --> Symbol
+@enduml

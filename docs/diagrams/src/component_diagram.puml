@@ -1,0 +1,10 @@
+@startuml
+package "Scratch Game CLI App" {
+  [CLI] --> [ConfigLoader]
+  [CLI] --> [GameEngine]
+  [GameEngine] --> [MatrixGenerator]
+  [GameEngine] --> [RewardEngine]
+  [GameEngine] --> [WinRuleEvaluator]
+  [RewardEngine] --> [BonusStrategy]
+}
+@enduml

@@ -1,0 +1,57 @@
+@startuml
+actor User
+participant CLI
+participant ConfigLoader
+participant GameEngine
+participant MatrixGenerator
+participant RewardEngine
+participant WinRuleEngine
+participant WinRuleEvaluator
+participant BonusStrategyFactory
+participant BonusStrategy
+
+User -> CLI : run with args
+
+CLI -> ConfigLoader : load(config.json)
+activate ConfigLoader
+ConfigLoader --> CLI : Config
+deactivate ConfigLoader
+
+CLI -> GameEngine : run(Config, Bet)
+activate GameEngine
+
+GameEngine -> MatrixGenerator : generateMatrix()
+activate MatrixGenerator
+MatrixGenerator --> GameEngine : matrix
+deactivate MatrixGenerator
+
+GameEngine -> RewardEngine : evaluate(matrix, bet, config)
+activate RewardEngine
+
+RewardEngine -> WinRuleEngine : evaluateAll(matrix, rules)
+activate WinRuleEngine
+WinRuleEngine -> WinRuleEvaluator : evaluate(rule)
+activate WinRuleEvaluator
+WinRuleEvaluator --> WinRuleEngine : MatchResult
+deactivate WinRuleEvaluator
+WinRuleEngine --> RewardEngine : all MatchResults
+deactivate WinRuleEngine
+
+alt bonus exists
+  RewardEngine -> BonusStrategyFactory : getStrategy(bonus)
+  activate BonusStrategyFactory
+  BonusStrategyFactory -> BonusStrategy : create
+  deactivate BonusStrategyFactory
+
+  RewardEngine -> BonusStrategy : apply(reward)
+  activate BonusStrategy
+  BonusStrategy --> RewardEngine : adjusted reward
+  deactivate BonusStrategy
+end
+
+RewardEngine --> GameEngine : GameResult
+deactivate RewardEngine
+
+GameEngine --> CLI : print result
+deactivate GameEngine
+@enduml

@@ -1,0 +1,13 @@
+@startuml
+node "User Machine" {
+    artifact "scratch-game.jar"
+    file "config.json"
+    [console] <<device>>
+
+}
+
+actor "User" as user
+user --> "scratch-game.jar" : execute CLI
+"scratch-game.jar" --> "config.json" : read
+"scratch-game.jar" --> "console" : write
+@enduml

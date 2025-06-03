@@ -1,0 +1,16 @@
+@startuml
+start
+:Read config.json;
+:Parse betting amount;
+:Generate symbol matrix;
+:Place bonus symbol;
+:Evaluate win rules;
+if (Any win?) then (yes)
+  :Apply bonus;
+else (no)
+
+endif
+:Calculate reward;
+:Print result;
+stop
+@enduml

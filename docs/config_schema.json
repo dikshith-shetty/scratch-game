@@ -1,0 +1,144 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Scratch Game Configuration",
+  "description": "Schema for the scratch game configuration file.",
+  "type": "object",
+  "properties": {
+    "columns": {
+      "type": "integer",
+      "description": "Number of columns in the game matrix.",
+      "minimum": 1
+    },
+    "rows": {
+      "type": "integer",
+      "description": "Number of rows in the game matrix.",
+      "minimum": 1
+    },
+    "symbols": {
+      "type": "object",
+      "description": "Definitions for the symbols used in the game.",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "reward_multiplier": {
+            "type": "number",
+            "description": "Multiplier applied to the reward for this symbol.",
+            "minimum": 0
+          },
+          "type": {
+            "type": "string",
+            "enum": ["standard", "bonus"],
+            "description": "Type of the symbol (standard or bonus)."
+          },
+          "impact": {
+            "type": "string",
+            "description": "Effect of the bonus symbol (e.g., multiply_reward, extra_bonus, miss).",
+            "enum": ["multiply_reward", "extra_bonus", "miss"]
+          },
+          "extra": {
+            "type": "integer",
+            "description": "Extra value associated with bonus symbols (e.g., extra bonus amount)."
+          }
+        },
+        "required": ["reward_multiplier", "type"],
+        "dependencies": {
+          "impact": ["type"],
+          "extra": ["impact", "type"]
+        }
+      }
+    },
+    "probabilities": {
+      "type": "object",
+      "description": "Probabilities for symbol generation.",
+      "properties": {
+        "standard_symbols": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "column": {
+                "type": "integer",
+                "description": "Column index for these probabilities.",
+                "minimum": 0
+              },
+              "row": {
+                "type": "integer",
+                "description": "Row index for these probabilities.",
+                "minimum": 0
+              },
+              "symbols": {
+                "type": "object",
+                "description": "Probabilities for each symbol at this position.",
+                "additionalProperties": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              }
+            },
+            "required": ["column", "row", "symbols"]
+          }
+        },
+        "bonus_symbols": {
+          "type": "object",
+          "properties": {
+            "symbols": {
+              "type": "object",
+              "description": "Probabilities for bonus symbols.",
+              "additionalProperties": {
+                "type": "integer",
+                "minimum": 0
+              }
+            }
+          },
+          "required": ["symbols"]
+        }
+      },
+      "required": ["standard_symbols"]
+    },
+    "win_combinations": {
+      "type": "object",
+      "description": "Definitions for winning combinations.",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "reward_multiplier": {
+            "type": "number",
+            "description": "Multiplier applied to the reward for this win combination.",
+            "minimum": 0
+          },
+          "when": {
+            "type": "string",
+            "description": "Condition for the win combination.",
+            "enum": ["same_symbols", "linear_symbols"]
+          },
+          "count": {
+            "type": "integer",
+            "description": "Number of matching symbols required (for same_symbols).",
+            "minimum": 1
+          },
+          "group": {
+            "type": "string",
+            "description": "Group this win combination belongs to."
+          },
+          "covered_areas": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "Coordinates of cells in the win combination (e.g., '0:0')."
+              }
+            },
+            "description": "Areas covered by this win combination (for linear_symbols)."
+          }
+        },
+        "required": ["reward_multiplier", "when", "group"],
+        "dependencies": {
+          "count": ["when"],
+          "covered_areas": ["when"]
+        }
+      }
+    }
+  },
+  "required": ["columns", "rows", "symbols", "probabilities", "win_combinations"]
+}
