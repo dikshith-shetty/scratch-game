@@ -25,7 +25,7 @@ This creates a fat JAR at:
 ## ▶️ Run the Game
 
 ```bash
-java -jar target/scratch-game.jar --config src/test/resources/config.json --betting-amount 100
+java -jar target/scratch-game.jar --config src/test/resources/config-3x3.json --betting-amount 100
 ```
 
 ### 💡 Example Output
